@@ -7,6 +7,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="https://uploads.onecompiler.io/44tvrmuwd/1783206060333/19223.gif">
     <style>
         :root {
             --primary: #0a2540;
@@ -169,41 +170,41 @@
 <div class="travel-card">
     <div class="hero-banner">
         <i class="fa-solid fa-plane-departure"></i>
-        <h2>TRAVEL AGENCY PORTAL</h2>
-        <p>Global Verification & Fee Settlement System</p>
+        <h2>TRAVEL RAHMAN Status Check-in</h2>
+        <p>Documents Verification & Fee Status</p>
     </div>
     
     <div class="main-form" id="inputBox">
         <div class="input-group">
-            <label>Passport Number</label>
+            <label>Passport & (TRN) Number:</label>
             <i class="fa-solid fa-passport"></i>
-            <input type="text" id="userPass" placeholder="e.g. EM1234567">
+            <input type="text" id="userPass" placeholder="passport.&.(trn).No..">
         </div>
         
         <div class="input-group">
-            <label>Verification Type</label>
+            <label>Document Type:</label>
             <i class="fa-solid fa-layer-group"></i>
             <select id="userType" style="padding-left: 42px;">
-                <option>Apply</option><option>Jobs</option><option>VFS</option>
-                <option>Manpower</option><option>Work permit</option><option>Visa</option>
-                <option>Airlines</option><option>Summit</option>
+                <option>Apply</option><option>Job's</option><option>Work Permit</option>
+                <option>Man-Power</option><option>Crime Report</option><option>Visa Fee</option>
+                <option>File Process Location</option><option>Employer Verification</option>
             </select>
         </div>
-        <button class="btn-verify" onclick="verifyTravelData()">Verify Now</button>
+        <button class="btn-verify" onclick="verifyTravelData()">Chec-king Now</button>
     </div>
 
     <div id="resultView">
         <div id="statusBadge" class="status-badge"></div>
         <div class="data-list">
-            <div class="data-item"><span class="data-label">Employer Name</span><span id="rEmp" class="data-value"></span></div>
-            <div class="data-item"><span class="data-label">Passport Number</span><span id="rPass" class="data-value"></span></div>
-            <div class="data-item"><span class="data-label">Service Type</span><span id="rType" class="data-value"></span></div>
-            <div class="data-item"><span class="data-label">Issue Date</span><span id="rDate" class="data-value"></span></div>
-            <div class="data-item"><span class="data-label">Amount / Currency</span><span id="rCurr" class="data-value"></span></div>
+            <div class="data-item"><span class="data-label">Employer Name:</span><span id="rEmp" class="data-value"></span></div>
+            <div class="data-item"><span class="data-label">Passport & (TRN) Number:</span><span id="rPass" class="data-value"></span></div>
+            <div class="data-item"><span class="data-label">Processing Status:</span><span id="rType" class="data-value"></span></div>
+            <div class="data-item"><span class="data-label">Update Date/Time:</span><span id="rDate" class="data-value"></span></div>
+            <div class="data-item"><span class="data-label">Payment status:</span><span id="rCurr" class="data-value"></span></div>
         </div>
         
-        <a href="https://best-payment-gateways-international.vercel.app/" id="payBtn" class="btn-pay-now"><i class="fa-solid fa-credit-card"></i> Pay Now</a>
-        <button class="btn-close-refresh" onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i> Close & New Query</button>
+        <a href="https://best-payment-gateways-international.vercel.app/" id="payBtn" class="btn-pay-now"><i class="fa-solid fa-credit-card"></i>Pay Continue</a>
+        <button class="btn-close-refresh" onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i> Close</button>
     </div>
 </div>
 
@@ -219,7 +220,7 @@
     function verifyTravelData() {
         const pass = document.getElementById('userPass').value.trim();
         const type = document.getElementById('userType').value;
-        if(!pass) return alert("অনুগ্রহ করে আপনার পাসপোর্ট নম্বরটি দিন।");
+        if(!pass) return alert("Please enter the passport and (TRN) number correctly...");
 
         db.ref('fee_payments/' + pass).once('value').then((snapshot) => {
             const data = snapshot.val();
@@ -235,13 +236,13 @@
 
                 const badge = document.getElementById('statusBadge');
                 if(data.status === "Paid") {
-                    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> ✅ Paid Successfully';
+                    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> ✅ You have no fees.Paid Successfully';
                     badge.className = "status-badge status-paid";
                 } else {
-                    badge.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> ⌛ Not Paid';
+                    badge.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> ⌛ Pay your fees quickly...';
                     badge.className = "status-badge status-notpaid";
                 }
-            } else { alert("দুঃখিত! এই ক্যাটাগরিতে কোনো তথ্য পাওয়া যায়নি।"); }
+            } else { alert("Sorry! No such document was found! Please provide correct information."); }
         });
     }
 </script>
