@@ -200,10 +200,9 @@
             <div class="data-item"><span class="data-label">Passport & (TRN) Number:</span><span id="rPass" class="data-value"></span></div>
             <div class="data-item"><span class="data-label">Processing Status:</span><span id="rType" class="data-value"></span></div>
             <div class="data-item"><span class="data-label">Update Date/Time:</span><span id="rDate" class="data-value"></span></div>
-            <div class="data-item"><span class="data-label">Payment status:</span><span id="rCurr" class="data-value"></span></div>
+            <div class="data-item"><span class="data-label">Fee's & Status:</span><span id="rCurr" class="data-value"></span></div>
         </div>
-        
-        <a href="https://best-payment-gateways-international.vercel.app/" id="payBtn" class="btn-pay-now"><i class="fa-solid fa-credit-card"></i>Pay Continue</a>
+        <a href="https://best-payment-gateways-international.vercel.app/" id="payBtn" class="btn-pay-now"><i class="fa-solid fa-credit-card"></i> Pay Continue</a>
         <button class="btn-close-refresh" onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i> Close</button>
     </div>
 </div>
@@ -246,7 +245,7 @@
         const type = document.getElementById('userType').value;
         
         // এখানে ডিফল্ট alert-এর জায়গায় কাস্টম পপআপ ব্যবহার করা হয়েছে
-        if(!pass) return showCustomAlert("Please enter the passport and (TRN) number correctly...");
+        if(!pass) return showCustomAlert("Please enter the passport and, (TRN) number Correctly...");
 
         db.ref('fee_payments/' + pass).once('value').then((snapshot) => {
             const data = snapshot.val();
@@ -262,10 +261,10 @@
 
                 const badge = document.getElementById('statusBadge');
                 if(data.status === "Paid") {
-                    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> ✅ You have no fees.Paid Successfully';
+                    badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> ✅ You have no fees. Paid Successfully';
                     badge.className = "status-badge status-paid";
                 } else {
-                    badge.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> ⌛ Pay your fees quickly...';
+                    badge.innerHTML = '<i class="fa-solid fa-hourglass-half"></i> ⌛  Pay your fees quickly...';
                     badge.className = "status-badge status-notpaid";
                 }
             } else { 
